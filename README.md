@@ -9,7 +9,10 @@ GIT command line tool
 
 ## Usage
 
-Usage: ${SCRIPT} -b branch_name [-d home_workspace] [-l]"
+By default, GitWib uses the current directory as root for all GIT repositories. To overload it, use -d option.
+To use it in local environment only, use -l option.
+
+Usage: gitwib -b branch_name [-d home_workspace] [-l]"
 * -b Branch named to search
 * -d Root directory with GIT repositories
 * -l used keep in local search
