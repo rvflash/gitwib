@@ -19,13 +19,13 @@ Usage: gitwib -b branch_name [-d home_workspace] [-l]"
 
 ## Quick start
 
-Launch `makefile.sh` in order to create alias `gitwib` and open a new shell terminal.
+Launch `makefile.sh` in order to create alias `gitwib`.
 
 ```bash
 $ ./makefile.sh
 ````
 
-Then, make your first search:
+Then open a new shell terminal and make your first search:
 
 ```bash
 $ gitwib -b "feature-42286"
