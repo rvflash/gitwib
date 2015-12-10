@@ -15,7 +15,7 @@ To use it in local environment only, use -l option.
 Usage: gitwib -b branch_name [-d home_workspace] [-l]"
 * -b Branch named to search
 * -d Root directory with GIT repositories
-* -l used keep in local search
+* -l Used to keep in local
 
 ## Quick start
 
