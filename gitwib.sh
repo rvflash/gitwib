@@ -54,13 +54,13 @@ function gitwib ()
     fi
 
     local FOUND=""
-    for REPOSOSITORY in ${GIT_REPOSITORIES[@]}; do
-        if ([ "$GIT_LOCAL" -eq 0 ] && [ -n "$(cd "$REPOSOSITORY" && git remote show origin | grep -E "\*?[[:space:]]${GIT_BRANCH}")" ]) ||
-           ([ "$GIT_LOCAL" -eq 1 ] && [ -n "$(cd "$REPOSOSITORY" && git branch | grep -E "\*?[[:space:]]${GIT_BRANCH}")" ]); then
+    for REPOSITORY in ${GIT_REPOSITORIES[@]}; do
+        if ([ "$GIT_LOCAL" -eq 0 ] && [ -n "$(cd "$REPOSITORY" && git remote show origin | grep -E "\*?[[:space:]]${GIT_BRANCH}")" ]) ||
+           ([ "$GIT_LOCAL" -eq 1 ] && [ -n "$(cd "$REPOSITORY" && git branch | grep -E "\*?[[:space:]]${GIT_BRANCH}")" ]); then
             if [ -n "$FOUND" ]; then
                 FOUND+="\n"
             fi
-            FOUND+="Branch named ${GIT_BRANCH} was found in the repository ${REPOSOSITORY}"
+            FOUND+="Branch named ${GIT_BRANCH} was found in the repository ${REPOSITORY}"
         fi
     done
 
