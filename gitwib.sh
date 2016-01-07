@@ -55,7 +55,7 @@ function gitwib ()
 
     local FOUND=""
     for REPOSOSITORY in ${GIT_REPOSITORIES[@]}; do
-        if ([ "$GIT_LOCAL" -eq 0 ] && [ -n "$(cd "$REPOSOSITORY" && git branch -a | grep "remotes/origin/${GIT_BRANCH}")" ]) ||
+        if ([ "$GIT_LOCAL" -eq 0 ] && [ -n "$(cd "$REPOSOSITORY" && git pull && git branch -a | grep "remotes/origin/${GIT_BRANCH}")" ]) ||
            ([ "$GIT_LOCAL" -eq 1 ] && [ -n "$(cd "$REPOSOSITORY" && git branch -a | grep "${GIT_BRANCH}")" ]); then
             if [ -n "$FOUND" ]; then
                 FOUND+="\n"
