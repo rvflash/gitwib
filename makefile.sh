@@ -1,30 +1,36 @@
 #!/usr/bin/env bash
 
-# Workspace
-USER_NAME=$(logname)
-USER_HOME=$(sudo -u ${USER_NAME} -H sh -c 'echo "$HOME"')
-CURRENT_SHELL="$(if [ ! -z "$ZSH_NAME" ]; then echo 'zsh'; else echo 'bash'; fi)"
-CURRENT_USER="$USER"
-CURRENT_OS=$(uname -s)
-SCRIPT_ROOT=$(pwd)
+##
+# GitWib: Git Where Is my Branch ?
+#
+# Install gitwib command line tool
+#
+# @copyright 2015 Hervé Gouchet
+# @license http://www.apache.org/licenses/LICENSE-2.0
+# @source https://github.com/rvflash/gitwib
 
-if [[ "$CURRENT_SHELL" == "bash" ]]; then
-    if [[ "$CURRENT_OS" = "Darwin" || "$CURRENT_OS" = "FreeBSD" ]]; then
-        BASH_RC="${USER_HOME}/.profile"
+# Workspace
+userHome=$(sudo -u $(logname) -H sh -c 'echo "$HOME"')
+shell=$(if [ ! -z "$ZSH_NAME" ]; then echo 'zsh'; else echo 'bash'; fi)
+os=$(uname -s)
+rootDir=$(pwd)
+
+if [[ "$shell" == "bash" ]]; then
+    if [[ "$os" = "Darwin" || "$os" = "FreeBSD" ]]; then
+        bashFile="${userHome}/.profile"
     else
-        BASH_RC="${USER_HOME}/.${CURRENT_SHELL}rc"
+        bashFile="${userHome}/.${shell}rc"
     fi
 else
-    BASH_RC="${USER_HOME}/.${CURRENT_SHELL}rc"
+    bashFile="${userHome}/.${shell}rc"
 fi
 
-ALREADY_DONE=$(grep "alias gitwib" ${BASH_RC})
-if [[ -z "$ALREADY_DONE" ]]; then
-    echo "" >> "${BASH_RC}"
-    echo "# Added by GitWib makefile" >> "${BASH_RC}"
-    echo "alias gitwib='${SCRIPT_ROOT}/gitwib.sh'" >> "${BASH_RC}"
+if [[ -z "$(grep "alias gitwib" ${bashFile})" ]]; then
+    echo  >> "${bashFile}"
+    echo "# Added by GitWib makefile" >> "${bashFile}"
+    echo "alias gitwib='${rootDir}/gitwib.sh'" >> "${bashFile}"
 
-    source "${BASH_RC}"
+    source "${bashFile}"
     if [[ $? -eq 0 ]]; then
         echo "Success to create gitwib alias"
     else
