@@ -132,7 +132,7 @@ function gitwib ()
     while read -d '' -r repository; do
         if [[ -n "$(__git_branch "$repository" "$remote" | grep -E "\*?[[:space:]]?${branch}[[:space:]]?$")" ]]; then
            rep="${repository:${#dir}}"
-           res+="Branch named ${GW_COLOR_BLUE}${branch}${GW_COLOR_OFF} was found in ${GW_COLOR_BLUE}${rep:: -4}${GW_COLOR_OFF}\n"
+           res+="Branch named ${GW_COLOR_BLUE}${branch}${GW_COLOR_OFF} was found in ${GW_COLOR_BLUE}${rep::${#rep}-4}${GW_COLOR_OFF}\n"
         fi
         nb+=1
         __progress_bar ${nb} ${count}
